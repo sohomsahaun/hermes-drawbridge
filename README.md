@@ -18,11 +18,11 @@ In native Hermes Desktop, connect to your Hermes backend and select the profile 
 
 The Drawbridge sidebar page lists **Active shares** and lets you edit **Share defaults**. When there are no active shares, it explains how to start one. To start sharing, open Drawbridge beside the message box in the target chat.
 
-1. Open a chat on the connected profile and click **Drawbridge** by the message box. If the chat is new, send a message first.
+1. Select the profile that owns the chat, open the chat, and click **Drawbridge** by the message box. If the chat is new, send a message first.
 2. Choose a folder, review the permissions, and click **Start sharing**. Ask Hermes to list the folder or read a file by its relative path.
 3. Use **Change access** to adjust permissions or **Stop sharing** to end access. To switch folders, stop the current share and choose another.
 
-Each chat can share one folder at a time. To share the same folder with another chat, grant access there separately. Stopping one share leaves the others active. Switching profiles or gateways stops the affected shares on Desktop. The old backend grant expires after its heartbeat timeout. Start a new share when you return. Drawbridge uses the public `ctx.rest` API, which follows the active profile. Install matching versions of both Drawbridge components. To revoke Drawbridge’s Desktop permission for a folder, go to **Capabilities → Plugins → Folder access**.
+Each chat can share one folder at a time. To share the same folder with another chat, grant access there separately. Stopping one share leaves the others active. Switching profiles or gateways stops the affected shares on Desktop. The old backend grant expires after its heartbeat timeout. Start a new share when you return. Drawbridge uses the public `ctx.rest` API, which follows the active profile. If you open a chat from All profiles, switch to the profile that owns the chat before using Drawbridge. Install matching versions of both Drawbridge components. To revoke Drawbridge’s Desktop permission for a folder, go to **Capabilities → Plugins → Folder access**.
 
 ## Review file changes
 
@@ -30,7 +30,18 @@ Enable **Update existing files** or **Create new files** to allow the correspond
 
 If the file changed after the proposal was prepared, ask Hermes to prepare a fresh edit. **Create** refuses to overwrite an existing file. An editor can still save between Drawbridge’s final comparison and its write. If a save’s outcome is unclear after a disconnect, check the local file before retrying.
 
-On Desktop builds that support transcript cards, Hermes can request folder access in chat. **Approve and continue** is available when the chat has no active share, the request matches a folder you previously authorized, and Desktop supports the requested permissions. For a write request on the same folder already shared read-only, **Approve upgrade and continue** replaces the share with the displayed permissions and duration. For a requested folder Desktop has never authorized, **Confirm folder** opens the native picker. Confirming the requested folder starts the share and resumes the chat. Choosing a different folder opens a review of the selected folder, permissions, and duration. Canceling leaves the request pending. When the request gives no folder, use **Choose folder**, then **Share and continue**. If the card says **Review folder access**, open it to review the existing share or available permissions. Select **Reject** to dismiss the request.
+## Respond to a folder access request
+
+Hermes can request folder access in chat on Desktop builds that support transcript cards.
+
+- **Approve and continue** starts a share when Desktop already has permission for the requested folder, the requested permissions are supported, and the chat has no active share.
+- **Confirm folder** opens the system folder picker for a requested folder you have yet to authorize. Selecting the requested folder starts the share and resumes the chat. Selecting a different folder opens a review of the selected folder, permissions, and duration.
+- **Approve upgrade and continue** replaces a read-only share of the same folder with the permissions and duration shown on the card.
+- **Choose folder** appears when the request gives no folder. Select a folder, then use **Share and continue**.
+- **Review folder access** opens the dashboard to review the existing share or available permissions.
+- **Reject** dismisses the request.
+
+Canceling the picker leaves the request pending until it expires.
 
 ## Access and limits
 
