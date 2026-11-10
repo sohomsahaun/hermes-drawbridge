@@ -1,0 +1,6 @@
+{
+  "name": "hermes-drawbridge",
+  "label": "Drawbridge",
+  "version": "0.1.0",
+  "api": "plugin_api.py"
+}

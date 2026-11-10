@@ -1,0 +1,21 @@
+name: hermes-drawbridge
+version: 0.1.0
+description: Live access to a folder explicitly shared from Hermes Desktop.
+provides_tools:
+  - drawbridge_folder
+provides_hooks:
+  - pre_tool_call
+  - post_approval_response
+config_schema:
+  max_read_kib:
+    type: int
+    default: 96
+    description: "VPS read ceiling in KiB for new shares (1–96)."
+  max_reviewed_write_kib:
+    type: int
+    default: 64
+    description: "VPS ceiling in KiB for individually reviewed writes (1–64)."
+  max_session_write_kib:
+    type: int
+    default: 128
+    description: "VPS ceiling in KiB for writes already approved for the active share (1–128)."
